@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: loja-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loja_virtual
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./scripts/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./scripts/02_dados.sql:/docker-entrypoint-initdb.d/02_dados.sql
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
